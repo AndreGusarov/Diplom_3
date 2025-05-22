@@ -43,16 +43,13 @@ from data.urls import Urls
 
 from selenium.webdriver.chrome.options import Options
 
-
 @pytest.fixture(params=["firefox", "chrome"])
 def driver_do(request):
     if request.param == "firefox":
         driver = webdriver.Firefox()
     elif request.param == "chrome":
-        chrome_options = Options()
-        chrome_options.add_argument("--start-maximized")
         driver = webdriver.Chrome()
-    
+        
     driver.get(Urls.MAIN_PAGE)
     yield driver
     driver.quit()

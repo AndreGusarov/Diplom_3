@@ -39,13 +39,6 @@ class BasePage:
     def wait_until_element_is_visible(self, locator):
         return WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(locator))  
         
-    """@allure.step('Перетащить элемент')
-    def drag_and_drop(self, first_locator, second_locator):
-        draggeble = self.driver.find_element(*first_locator)
-        droppable = self.driver.find_element(*second_locator)
-        action_chains = ActionChains(self.driver)
-        action_chains.drag_and_drop(draggeble, droppable).perform()
-        """
     @allure.step('Перетащить элемент с помощью JS')
     def drag_and_drop(self, first_locator, second_locator):
         source = self.driver.find_element(*first_locator)
@@ -86,6 +79,7 @@ class BasePage:
         simulateHTML5DragAndDrop(arguments[0], arguments[1]);
         """
         self.driver.execute_script(js, source, target)
+
     @allure.step('Перемещение и клик')
     def move_to_element_and_click(self, locator):
         element = self.driver.find_element(*locator)
@@ -94,11 +88,7 @@ class BasePage:
 
     @allure.step('Дождаться пока элемен будет доступен для нажатия')
     def wait_element_to_be_clickable(self, locator):
-        return WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(locator))
-        
-    @allure.step('Найти элементы на странице')
-    def find_elements(self, locator):
-        return self.driver.find_element(*locator)
+        return WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(locator))
     
     @allure.step('Дождаться появления текста в элементе')
     def wait_text_to_be_present_in_element(self, locator, text):

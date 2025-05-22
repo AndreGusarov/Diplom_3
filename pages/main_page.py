@@ -2,17 +2,32 @@ import allure
 
 from web_locators.locators import *
 from pages.base_page import BasePage
-
+from selenium.common.exceptions import TimeoutException
 class MainPage(BasePage):
+    
     @allure.step('Переход по кнопке "Личный кабинет"')
     def click_personal_account(self):
-        self.move_to_element_and_click(MainPageLocators.PROFILE_BUTTON)
+        try:
+            self.move_to_element_and_click(MainPageLocators.PROFILE_BUTTON)
+            self.wait_until_element_is_visible(UserProfileLocators.PROFILE_BUTTON)
+        except TimeoutException:
+            try:
+                self.wait_element_to_be_clickable(MainPageLocators.PROFILE_BUTTON).click()
+            except TimeoutException:
+                raise
 
     @allure.step('Переход на страницу "Лента заказов"')
     def click_orders_list_button(self):
-        self.move_to_element_and_click(MainPageLocators.ORDERS_LIST_BUTTON)
-        self.wait_until_element_is_visible(OrdersPageLocators.ORDERS_LIST_TITLE)
-    
+        try:
+            self.move_to_element_and_click(MainPageLocators.ORDERS_LIST_BUTTON)
+            self.wait_until_element_is_visible(OrdersPageLocators.ORDERS_LIST_TITLE)
+        except TimeoutException:
+            try:
+                self.wait_element_to_be_clickable(MainPageLocators.ORDERS_LIST_BUTTON).click()
+                self.wait_until_element_is_visible(OrdersPageLocators.ORDERS_LIST_TITLE)
+            except TimeoutException:
+                raise 
+
     @allure.step('Переход в конструктор')
     def click_constructor_button(self):
         self.click_element(MainPageLocators.CONSTRUCTOR_BUTTON)
@@ -65,10 +80,6 @@ class MainPage(BasePage):
         while order_id == '9999':
             order_id = self.get_actual_text(MainPageLocators.ORDER_ID)
         return f"{order_id}"
-        
-    @allure.step("Проверка открытия модального окна")
-    def modal_box_is_open(self):
-        return self.check_presence(MainPageLocators.ORDER_ID)
 
     @allure.step('Проверить наличие, что заказа начали готовить')
     def check_displayed_order_status_text(self):
@@ -77,6 +88,5 @@ class MainPage(BasePage):
     @allure.step("Закрыть модальное окно после создания заказа")
     def click_close_modal_order(self):
         self.wait_element_to_be_clickable(MainPageLocators.CLOSE_MODAL_ORDER)
-        """self.click_element(MainPageLocators.CLOSE_MODAL_ORDER)"""
         self.move_to_element_and_click(MainPageLocators.CLOSE_MODAL_ORDER)
     

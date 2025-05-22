@@ -13,7 +13,7 @@ class TestPersonal_Account:
         assert current_url == Urls.PROFILE_PAGE
 
     @allure.title('Переход в ЛК в раздел История заказов по кнопке "История заказов"')
-    @allure.description('При нажатиии на кнопку "История заказов" в ЛК профиля, происходит переход к истории заказов юзера')
+    @allure.description('При нажатии на кнопку "История заказов" в ЛК профиля, происходит переход к истории заказов юзера')
     def test_go_to_order_history(self, pages: UIWorkerWeb, login):
         pages.click_personal_account()
         pages.click_order_history_button()
@@ -21,7 +21,7 @@ class TestPersonal_Account:
         assert current_url == Urls.ORDER_HISTORY_PAGE
 
     @allure.title('Переход на старницу авторизации при нажатии в ЛК кнопки "Выход"')
-    @allure.description('При нажатии в ЛК профиля кнопки "Выход" происходит разлогин пользователя на сайте и редирект на страницу авторизации')
+    @allure.description('При нажатии в ЛК профиля кнопки "Выход" происходит логаут и редирект на страницу авторизации')
     def test_logout(self, pages: UIWorkerWeb, login):
         pages.click_personal_account()
         pages.click_log_out_button()

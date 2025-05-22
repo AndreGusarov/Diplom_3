@@ -6,7 +6,6 @@ class PasswordRecoveryPage(BasePage):
 
     @allure.step('Нажать на "Восстановить пароль"')
     def click_password_reset_link(self):
-        """self.wait_element_to_be_clickable(LoginLocators.FORGOT_PASSWORD).click()"""
         self.click_element(LoginLocators.FORGOT_PASSWORD)
 
     @allure.step('Вводим емейл в поле для восстановления пароля')
@@ -16,7 +15,6 @@ class PasswordRecoveryPage(BasePage):
     @allure.step('Нажимаем на кнопку Восстановить')
     def click_reset_button(self):
         self.move_to_element_and_click(ForgotPasswordLocators.RESET_BUTTON)
-
 
     @allure.step('Кликаем на кнопку Показать/скрыть пароль')
     def click_on_show_password_button(self):

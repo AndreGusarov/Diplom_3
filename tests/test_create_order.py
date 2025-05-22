@@ -1,4 +1,3 @@
-from typing import Literal
 import allure
 import pytest
 
@@ -15,8 +14,8 @@ class TestCreateOrder:
         pages.click_order()
         assert pages.check_order_structure() == True
 
-    @allure.title('При создании заказа этот заказа отображается как и в История заказов в ЛК профиля, так и в "Ленте заказов"')
-    @allure.description('Соpдаем заказа и проверяем есть ли он в ЛК в Истории заказов и есть ли этот же заказ в "Ленте заказов"')
+    @allure.title('Заказы пользователя из раздела «История заказов» отображаются на странице «Лента заказов»,')
+    @allure.description('Проверка отображения заказа из "Истоии заказов" в "Ленте заказов"')
     def test_find_order_in_list(self, pages, login):
         pages.add_filling_to_order()
         pages.click_order_button()
@@ -30,9 +29,8 @@ class TestCreateOrder:
         is_order_id_found_at_feed = pages.is_order_id_found_at_feed(order_number)
         assert is_order_id_found_at_history and is_order_id_found_at_feed, "Заказы в истории и в ленте не совпадают"
 
-    @allure.title('При создании заказа, происходит увеличения значения счетчиков заказов "Выполнено за все время"/"Выполнено за сегодня"')
-    @allure.description('Сверяем счетчик заказов "Выполнено за все время" / "Выполнено за сегодня" до создания заказа и после создания заказа '
-                        'Счетчик должен увеличиться')
+    @allure.title('При создани нового заказа, происходит увеличение значения счетчиков заказов "Выполнено за все время"/"Выполнено за сегодня"')
+    @allure.description('Проверка увеличения счетчиков "Выполнено за все время" / "Выполнено за сегодня" после создания заказа ')
     @pytest.mark.parametrize('counter', [OrdersPageLocators.TOTAL_ORDER_COUNT, OrdersPageLocators.DAILY_ORDER_COUNT])
     def test_today_orders_counter(self, pages, counter, login):
         pages.click_orders_list_button()

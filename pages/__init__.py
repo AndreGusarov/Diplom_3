@@ -5,16 +5,6 @@ from pages.password_recovery_page import PasswordRecoveryPage
 from pages.user_profile_page import UserProfilePage
 from pages.create_order_page import CreateOrderPage
 
-"""class UIWorkerWeb(BasePage):
-    def __init__(self, driver, locators):
-        super().__init__(driver)
-        self.main_page = MainPage(driver)
-        self.auth_user = AuthUser (driver)
-        self.password_recovery = PasswordRecoveryPage(driver)
-        self.user_profile = UserProfilePage(driver)
-        self.create_order = CreateOrderPage(driver)
-        self.locators = locators
-        """
 class UIWorkerWeb(MainPage, AuthUser, PasswordRecoveryPage, UserProfilePage, CreateOrderPage):
     def __init__(self, driver, locators):
         super().__init__(driver)

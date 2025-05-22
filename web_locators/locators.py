@@ -1,16 +1,17 @@
 from selenium.webdriver.common.by import By   
 
 class MainPageLocators:
+
     PROFILE_BUTTON = By.XPATH, ".//p[text()='Личный Кабинет']"
     LOGIN_PROFILE_BUTTON = By.XPATH, ".//button[text()='Войти в аккаунт']"
     CONSTRUCTOR_BUTTON = By.XPATH, '//p[text()="Конструктор"]/parent::a'
     MAIN_LIST_TITLE = By.XPATH, "//h1[text()='Соберите бургер']"
-    ORDERS_LIST_BUTTON = By.XPATH, '//p[text()="Лента Заказов"]/parent::a'
+    ORDERS_LIST_BUTTON = By.XPATH, '//p[text()="Лента Заказов"]'
     BUN_INGREDIENT = (By.XPATH, '//p[text()="Флюоресцентная булка R2-D3"]')  
     INGREDIENT_DETAILS_POPUP = (By.XPATH, '//h2[text()="Детали ингредиента"]')  
     CROSS_BUTTON = By.XPATH, '//button[contains(@class,"close")]' 
     INGREDIENT_COUNTER = (By.XPATH, '//ul[1]/a[1]//p[contains(@class, "num")]') 
-    ORDER_BASKET = (By.XPATH, "//span[@class='constructor-element__text' and text()='Перетяните булочку сюда (низ)']")
+    ORDER_BASKET = (By.CSS_SELECTOR, 'img.constructor-element__image[src="./static/media/loading.89540200.svg"][alt="Перетяните булочку сюда (низ)"]')
     CREATE_ORDER_BUTTON = By.XPATH, '//button[text()="Оформить заказ"]'  
     ORDER_IDENTIFICATE = (By.XPATH, '//p[text()="идентификатор заказа"]') 
     ORDER_ID = (By.CLASS_NAME, "Modal_modal__title_shadow__3ikwq")
@@ -33,7 +34,7 @@ class ForgotPasswordLocators:
     SAVE_BUTTON = By.XPATH, '//button[text()="Сохранить"]'  
 class UserProfileLocators:
     PROFILE_BUTTON = (By.LINK_TEXT, 'Профиль') 
-    ORDER_HISTORY_BUTTON = (By.LINK_TEXT, 'История заказов') 
+    ORDER_HISTORY_BUTTON = (By.XPATH, './/a[@href="/account/order-history"]')
     ENABLED_ORDER_HISTORY_BUTTON = (By.XPATH, '//ul/li[2]/a[contains(@class, "Account_link_active")]')  
     LOGOUT_BUTTON = (By.XPATH, ".//button[text()='Выход']")
 

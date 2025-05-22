@@ -7,7 +7,7 @@ from pages import UIWorkerWeb
 
 
 class TestRecoveryPsw:
-    @allure.title('Проверка перехода на Восстановить пароль')
+    @allure.title('Проверка перехода на страницу восстановления пароля по кнопке «Восстановить пароль»')
     def test_click_password_reset_button(self, pages: UIWorkerWeb):
         pages.click_personal_account()
         pages.click_password_reset_link()
@@ -23,7 +23,7 @@ class TestRecoveryPsw:
         current_url = pages.get_current_url()
         assert current_url == Urls.RESET_PSW_PAGE
 
-    @allure.title('Проверка, что клик по кнопке показать/скрыть пароль делает поле активным')
+    @allure.title('Проверка, что клик по кнопке показать/скрыть пароль делает поле активным — подсвечивает его')
     def test_make_field_active(self, pages: UIWorkerWeb):
         pages.open_link(Urls.RESTORE_PSW_PAGE)
         pages.set_email_for_reset_password(DataPerson.user_login)
